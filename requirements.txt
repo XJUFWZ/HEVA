@@ -1,0 +1,12 @@
+--extra-index-url https://download.pytorch.org/whl/cu128
+
+numpy==2.2.6
+scipy==1.15.3
+scikit-learn==1.7.2
+torch==2.11.0+cu128
+torchaudio==2.11.0+cu128
+av==18.1.0
+PyYAML==6.0.3
+transformers==5.12.1
+accelerate==1.14.0
+librosa==0.11.0
