@@ -1,0 +1,69 @@
+experiment:
+  name: DA-Ridge
+  seeds: [1, 2, 3, 4, 42]
+  output_dir: outputs
+runtime:
+  backend: cuda
+  frozen_config: configs/frozen.yaml
+protocol:
+  validation_fraction: 0.2
+model:
+  backbone_trainable: false
+  valence:
+    base_alpha: 1.0
+    semantic_alpha: 1.0
+    final_alpha: 1.0
+    fusion_weight: 0.5
+    context_radius: 8
+    oof_splits: 5
+  arousal:
+    top_k: 8
+    fusion_weight: 0.5
+    context_radius: 8
+    temporal_alpha: 0.01
+    oof_splits: 5
+datasets:
+  deam:
+    grouping: track
+    expected:
+      train_tracks: 1744
+      train_points: 104640
+      test_tracks: 58
+      test_points: 25355
+    paths:
+      global_features: ${DARIDGE_DATA_ROOT}/deam/global
+      head_features: ${DARIDGE_DATA_ROOT}/deam/heads
+      acoustic_train: ${DARIDGE_DATA_ROOT}/deam/acoustic_train.npz
+      acoustic_test: ${DARIDGE_DATA_ROOT}/deam/acoustic_test.npz
+      semantic_train:
+        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part00
+        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part01
+        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part02
+        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part03
+        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part04
+        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part05
+        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part06
+        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part07
+        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part08
+        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part09
+      semantic_test:
+        - ${DARIDGE_DATA_ROOT}/deam/semantic_test
+  pmemo:
+    grouping: audio_sha256
+    expected:
+      train_tracks: 632
+      train_content_groups: 626
+      train_points: 30690
+      test_tracks: 40
+      test_content_groups: 40
+      test_points: 4656
+    paths:
+      manifest: ${DARIDGE_DATA_ROOT}/pmemo/manifest.csv
+      global_features: ${DARIDGE_DATA_ROOT}/pmemo/global
+      head_features: ${DARIDGE_DATA_ROOT}/pmemo/heads
+      acoustic_train: ${DARIDGE_DATA_ROOT}/pmemo/acoustic_train.npz
+      acoustic_test: ${DARIDGE_DATA_ROOT}/pmemo/acoustic_test.npz
+      semantic_train:
+        - ${DARIDGE_DATA_ROOT}/pmemo/semantic_train
+      semantic_test:
+        - ${DARIDGE_DATA_ROOT}/pmemo/semantic_test
