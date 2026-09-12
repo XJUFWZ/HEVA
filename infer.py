@@ -3,8 +3,8 @@ import csv
 import json
 from pathlib import Path
 
-from daridge.audio import FEATURE_PROTOCOL_VERSION, FrozenAudioExtractor
-from daridge.inference import load_model_package, predict_feature_sequence
+from heva.audio import FEATURE_PROTOCOL_VERSION, FrozenAudioExtractor
+from heva.inference import load_model_package, predict_feature_sequence
 
 
 def parse_args():

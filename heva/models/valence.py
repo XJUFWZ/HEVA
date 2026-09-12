@@ -2,14 +2,14 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from daridge.models.ridge import (
+from heva.models.ridge import (
     RidgeState,
     fit_ridge_state,
     predict_ridge,
     predict_ridge_state,
 )
-from daridge.models.temporal import build_temporal_features
-from daridge.splits import grouped_folds
+from heva.models.temporal import build_temporal_features
+from heva.splits import grouped_folds
 
 
 @dataclass(frozen=True)

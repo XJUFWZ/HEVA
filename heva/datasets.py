@@ -5,7 +5,7 @@ from pathlib import Path
 
 import numpy as np
 
-from daridge.features import (
+from heva.features import (
     SemanticFeatureMatrix,
     align_acoustic_rows,
     load_acoustic_features,

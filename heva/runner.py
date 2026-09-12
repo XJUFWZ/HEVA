@@ -4,14 +4,14 @@ from pathlib import Path
 
 import numpy as np
 
-from daridge.audio import FEATURE_PROTOCOL_VERSION
-from daridge.config import get_seed_config, validate_config
-from daridge.datasets import load_deam, load_pmemo
-from daridge.inference import DARidgePackage, save_model_package
-from daridge.metrics import track_macro_metrics
-from daridge.models.arousal import fit_predict_arousal
-from daridge.models.valence import fit_predict_valence
-from daridge.splits import group_holdout
+from heva.audio import FEATURE_PROTOCOL_VERSION
+from heva.config import get_seed_config, validate_config
+from heva.datasets import load_deam, load_pmemo
+from heva.inference import HEVAPackage, save_model_package
+from heva.metrics import track_macro_metrics
+from heva.models.arousal import fit_predict_arousal
+from heva.models.valence import fit_predict_valence
+from heva.splits import group_holdout
 
 VALID_BRANCHES = {"both", "valence", "arousal"}
 
@@ -259,7 +259,7 @@ def run_experiment(
         }
 
     result = {
-        "experiment": "DA-Ridge",
+        "experiment": "HEVA",
         "dataset": dataset_name,
         "seed": int(seed),
         "branch": branch_name,
@@ -291,7 +291,7 @@ def run_experiment(
 
     # Export only the fixed main-model state and feature protocol.
     if model_output is not None:
-        package = DARidgePackage(
+        package = HEVAPackage(
             metadata={
                 "format_version": 4,
                 "dataset": dataset_name,

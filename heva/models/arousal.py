@@ -3,14 +3,14 @@ from dataclasses import dataclass
 import numpy as np
 from sklearn.model_selection import GroupKFold
 
-from daridge.metrics import one_dimension_metrics
-from daridge.models.ridge import (
+from heva.metrics import one_dimension_metrics
+from heva.models.ridge import (
     RidgeState,
     fit_ridge_state,
     predict_ridge,
     predict_ridge_state,
 )
-from daridge.models.temporal import build_temporal_features
+from heva.models.temporal import build_temporal_features
 
 
 def _validate(head_features, targets, group_ids, top_k):

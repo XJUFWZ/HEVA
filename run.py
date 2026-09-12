@@ -2,13 +2,13 @@ import argparse
 import json
 from pathlib import Path
 
-from daridge.config import load_config
-from daridge.runner import describe_experiment, run_experiment
+from heva.config import load_config
+from heva.runner import describe_experiment, run_experiment
 
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Run the DA-Ridge main experiment.",
+        description="Run the HEVA main experiment.",
     )
     parser.add_argument(
         "--config",

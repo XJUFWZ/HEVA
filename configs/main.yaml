@@ -1,5 +1,5 @@
 experiment:
-  name: DA-Ridge
+  name: HEVA
   seeds: [1, 2, 3, 4, 42]
   output_dir: outputs
 runtime:
@@ -31,23 +31,23 @@ datasets:
       test_tracks: 58
       test_points: 25355
     paths:
-      global_features: ${DARIDGE_DATA_ROOT}/deam/global
-      head_features: ${DARIDGE_DATA_ROOT}/deam/heads
-      acoustic_train: ${DARIDGE_DATA_ROOT}/deam/acoustic_train.npz
-      acoustic_test: ${DARIDGE_DATA_ROOT}/deam/acoustic_test.npz
+      global_features: ${HEVA_DATA_ROOT}/deam/global
+      head_features: ${HEVA_DATA_ROOT}/deam/heads
+      acoustic_train: ${HEVA_DATA_ROOT}/deam/acoustic_train.npz
+      acoustic_test: ${HEVA_DATA_ROOT}/deam/acoustic_test.npz
       semantic_train:
-        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part00
-        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part01
-        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part02
-        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part03
-        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part04
-        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part05
-        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part06
-        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part07
-        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part08
-        - ${DARIDGE_DATA_ROOT}/deam/semantic_train/part09
+        - ${HEVA_DATA_ROOT}/deam/semantic_train/part00
+        - ${HEVA_DATA_ROOT}/deam/semantic_train/part01
+        - ${HEVA_DATA_ROOT}/deam/semantic_train/part02
+        - ${HEVA_DATA_ROOT}/deam/semantic_train/part03
+        - ${HEVA_DATA_ROOT}/deam/semantic_train/part04
+        - ${HEVA_DATA_ROOT}/deam/semantic_train/part05
+        - ${HEVA_DATA_ROOT}/deam/semantic_train/part06
+        - ${HEVA_DATA_ROOT}/deam/semantic_train/part07
+        - ${HEVA_DATA_ROOT}/deam/semantic_train/part08
+        - ${HEVA_DATA_ROOT}/deam/semantic_train/part09
       semantic_test:
-        - ${DARIDGE_DATA_ROOT}/deam/semantic_test
+        - ${HEVA_DATA_ROOT}/deam/semantic_test
   pmemo:
     grouping: audio_sha256
     expected:
@@ -58,12 +58,12 @@ datasets:
       test_content_groups: 40
       test_points: 4656
     paths:
-      manifest: ${DARIDGE_DATA_ROOT}/pmemo/manifest.csv
-      global_features: ${DARIDGE_DATA_ROOT}/pmemo/global
-      head_features: ${DARIDGE_DATA_ROOT}/pmemo/heads
-      acoustic_train: ${DARIDGE_DATA_ROOT}/pmemo/acoustic_train.npz
-      acoustic_test: ${DARIDGE_DATA_ROOT}/pmemo/acoustic_test.npz
+      manifest: ${HEVA_DATA_ROOT}/pmemo/manifest.csv
+      global_features: ${HEVA_DATA_ROOT}/pmemo/global
+      head_features: ${HEVA_DATA_ROOT}/pmemo/heads
+      acoustic_train: ${HEVA_DATA_ROOT}/pmemo/acoustic_train.npz
+      acoustic_test: ${HEVA_DATA_ROOT}/pmemo/acoustic_test.npz
       semantic_train:
-        - ${DARIDGE_DATA_ROOT}/pmemo/semantic_train
+        - ${HEVA_DATA_ROOT}/pmemo/semantic_train
       semantic_test:
-        - ${DARIDGE_DATA_ROOT}/pmemo/semantic_test
+        - ${HEVA_DATA_ROOT}/pmemo/semantic_test

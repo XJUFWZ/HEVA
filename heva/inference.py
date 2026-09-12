@@ -4,13 +4,13 @@ from pathlib import Path
 
 import numpy as np
 
-from daridge.models.arousal import ArousalState, predict_arousal_model
-from daridge.models.ridge import RidgeState
-from daridge.models.valence import ValenceState, predict_valence_model
+from heva.models.arousal import ArousalState, predict_arousal_model
+from heva.models.ridge import RidgeState
+from heva.models.valence import ValenceState, predict_valence_model
 
 
 @dataclass(frozen=True)
-class DARidgePackage:
+class HEVAPackage:
     metadata: dict
     valence: ValenceState
     arousal: ArousalState
@@ -131,7 +131,7 @@ def load_model_package(path):
     with np.load(Path(path), allow_pickle=False) as archive:
         manifest = json.loads(str(archive["manifest_json"].item()))
         if int(manifest.get("format_version", 0)) != 4:
-            raise ValueError("unsupported DA-Ridge model package version")
+            raise ValueError("unsupported HEVA model package version")
         valence_data = manifest["valence"]
         arousal_data = manifest["arousal"]
         valence = ValenceState(
@@ -175,7 +175,7 @@ def load_model_package(path):
                 (int(layer), int(head)) for layer, head in arousal_data["selected_heads"]
             ),
         )
-    return DARidgePackage(
+    return HEVAPackage(
         metadata=manifest["metadata"],
         valence=valence,
         arousal=arousal,

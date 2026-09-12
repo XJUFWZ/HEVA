@@ -9,6 +9,7 @@ AUDIO_SAMPLE_RATE = 16_000
 SEGMENT_SECONDS = 15.0
 SEGMENT_SAMPLES = int(AUDIO_SAMPLE_RATE * SEGMENT_SECONDS)
 TARGET_INTERVAL_SECONDS = 0.5
+# Keep the serialized protocol identifier compatible with existing checkpoints.
 FEATURE_PROTOCOL_VERSION = "daridge-audio-v1"
 HEAD_DIM = 128
 PROJECTION_PATTERN = "self_attn.o_proj"

@@ -1,6 +1,7 @@
-# DA-Ridge
+# HEVA
 
-DA-Ridge predicts continuous valence and arousal with dimension-specific
+HEVA (Hierarchical Evidence organization for Valence-Arousal in DMER)
+predicts continuous valence and arousal with dimension-specific
 readouts over frozen Music Flamingo features. This repository contains the
 preparation, training, evaluation, export, and inference code used in the
 paper. Datasets, model weights, feature caches, and run outputs are not
@@ -8,15 +9,15 @@ included.
 
 ## Model Architecture
 
-![DA-Ridge model architecture](framework.png?raw=1&v=20260831)
+![HEVA model architecture](framework.png)
 
 ## Project Structure
 
 ```text
-DA-Ridge-main/
+HEVA-main/
 |-- README.md
 |-- LICENSE                  # Apache License 2.0 for original repository code
-|-- framework.png            # DA-Ridge model architecture figure
+|-- framework.png            # HEVA model architecture figure
 |-- requirements.txt          # Pinned Python dependencies
 |-- prepare.py                # Build manifests and feature caches
 |-- run.py                    # Training and evaluation entry point
@@ -31,7 +32,7 @@ DA-Ridge-main/
 |-- configs/
 |   |-- main.yaml             # Dataset paths and fixed main hyperparameters
 |   `-- frozen.yaml           # Frozen heads and Ridge settings for each seed
-`-- daridge/
+`-- heva/
     |-- __init__.py
     |-- audio.py              # Audio decoding and frozen feature extraction
     |-- config.py             # YAML loading and configuration validation
@@ -90,7 +91,7 @@ Define the input and output paths:
 export DEAM_ROOT=/path/to/DEAM
 export PMEMO_ROOT=/path/to/PMEmo
 export MUSIC_FLAMINGO_ROOT=/path/to/nvidiamusic-flamingo-2601-hf
-export DARIDGE_DATA_ROOT=/path/to/da-ridge-features
+export HEVA_DATA_ROOT=/path/to/heva-features
 ```
 
 ## Feature Preparation
@@ -102,7 +103,7 @@ CUDA_VISIBLE_DEVICES=0 python prepare.py \
   --dataset deam \
   --stage all \
   --dataset-root "$DEAM_ROOT" \
-  --output-root "$DARIDGE_DATA_ROOT" \
+  --output-root "$HEVA_DATA_ROOT" \
   --backbone "$MUSIC_FLAMINGO_ROOT" \
   --device cuda:0 \
   --acoustic-device cuda:0 \
@@ -117,7 +118,7 @@ CUDA_VISIBLE_DEVICES=0 python prepare.py \
   --dataset pmemo \
   --stage all \
   --dataset-root "$PMEMO_ROOT" \
-  --output-root "$DARIDGE_DATA_ROOT" \
+  --output-root "$HEVA_DATA_ROOT" \
   --backbone "$MUSIC_FLAMINGO_ROOT" \
   --device cuda:0 \
   --acoustic-device cuda:0 \
@@ -195,9 +196,9 @@ columns `time`, `valence`, and `arousal`.
 
 ## License and Third-Party Terms
 
-Copyright 2026 DA-Ridge Authors.
+Copyright 2026 HEVA Authors.
 
-The original DA-Ridge source code and documentation in this repository are
+The original HEVA source code and documentation in this repository are
 licensed under the [Apache License 2.0](LICENSE).
 
 The Apache License 2.0 applies only to the original content distributed in

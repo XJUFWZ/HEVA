@@ -10,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-from daridge.audio import (
+from heva.audio import (
     ADJECTIVE_GROUPS,
     AUDIO_SAMPLE_RATE,
     BASE_PROMPT,
@@ -1128,7 +1128,7 @@ def _stage_splits(value):
 # Command-line interface.
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Prepare all DA-Ridge feature caches from official audio and labels."
+        description="Prepare all HEVA feature caches from official audio and labels."
     )
     parser.add_argument("--dataset", choices=("deam", "pmemo"), required=True)
     parser.add_argument(
