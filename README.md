@@ -54,10 +54,13 @@ HEVA-main/
 
 ## Environment
 
-Use Python 3.12 with an NVIDIA driver compatible with CUDA 12.8. Install the
+Use Python 3.12 with an NVIDIA driver compatible with CUDA 12.8. The shell
+commands below assume Linux/bash. Clone the repository and install the
 dependencies from the repository root:
 
 ```bash
+git clone https://github.com/XJUFWZ/HEVA.git
+cd HEVA
 python -m pip install -r requirements.txt
 ```
 
@@ -139,6 +142,10 @@ stages are available through `--stage manifest`, `backbone`, `semantic`,
 
 ## Reproduce the Main Results
 
+These commands reproduce Table 1. They read the fixed selected heads and
+Ridge settings from `configs/frozen.yaml`; the head-selection step in the
+next section is optional and does not need to be run first.
+
 Check the resolved configuration without loading feature caches:
 
 ```bash
@@ -168,9 +175,12 @@ CUDA_VISIBLE_DEVICES=0 python run.py \
 
 ## Reproduce the Arousal Head Selection
 
-The frozen arousal attention heads can be re-selected from training data only.
-By default the script is self-contained: it ranks a shortlist on the fly, uses
-the released frozen heads as the baseline, and never loads the test split.
+This step is optional and verifies, from training data only, how the fixed
+arousal heads in `configs/frozen.yaml` were obtained. The main-results
+commands above do not depend on it, and it requires the feature caches
+produced in the previous section. By default the script is self-contained:
+it ranks a shortlist on the fly, uses the released frozen heads as the
+baseline, and never loads the test split.
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 python select_heads.py \
@@ -182,12 +192,16 @@ CUDA_VISIBLE_DEVICES=0 python select_heads.py \
 ```
 
 The selected heads and cross-validation metrics are written as JSON under
-`outputs/head_selection/`, and `configs/frozen.yaml` is not modified. Use
-`--dataset pmemo` for PMEmo and `--backend cpu --cache-device cpu` on a
-CPU-only machine. An exact per-seed reproduction can instead take training-only
-ranking and protocol files through `--ranking-template` and
-`--selection-protocol`; `--refit-alpha` is an optional diagnostic that does not
-change the selected heads.
+`outputs/head_selection/`. This output is for verification only: it is not
+read by `run.py`, and `configs/frozen.yaml` is never modified. Use
+`--dataset pmemo` for PMEmo. If GPU memory is limited, keep `--backend cuda`
+and move the cache to the CPU with `--cache-device cpu`; on a CPU-only
+machine use `--backend cpu --cache-device cpu`. For an exact per-seed
+reproduction, training-only ranking and protocol files can be supplied
+through `--ranking-template` and `--selection-protocol`; these files are
+not bundled in the repository and are available from the authors on request,
+while the default command runs without them. The `--refit-alpha` flag is an
+optional diagnostic that does not change the selected heads.
 
 ## Export and Run Inference
 
