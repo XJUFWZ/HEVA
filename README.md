@@ -22,7 +22,7 @@ HEVA-main/
 |-- prepare.py                # Build manifests and feature caches
 |-- run.py                    # Training and evaluation entry point
 |-- infer.py                  # Inference entry point for one audio file
-|-- select_heads.py           # Training-only arousal head selection
+|-- select_heads.py           # Arousal head selection entry point (CLI)
 |-- splits/                   # Song-level splits used in the paper
 |   |-- deam/
 |   |   |-- train.txt
@@ -39,6 +39,7 @@ HEVA-main/
     |-- config.py             # YAML loading and configuration validation
     |-- datasets.py           # DEAM and PMEmo cache loading and alignment
     |-- features.py           # Feature shard loading and row matching
+    |-- head_selection.py     # Training-only arousal head selection workflow
     |-- inference.py          # Model package serialization and inference
     |-- metrics.py            # PCC, CCC, and RMSE
     |-- runner.py             # End-to-end training and evaluation workflow
