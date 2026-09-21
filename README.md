@@ -1,11 +1,11 @@
 # HEVA
 
-HEVA (Hierarchical Evidence organization for Valence-Arousal in DMER)
-predicts continuous valence and arousal with dimension-specific
-readouts over frozen Music Flamingo features. This repository contains the
-preparation, training, evaluation, export, and inference code used in the
-paper. Datasets, model weights, feature caches, and run outputs are not
-included.
+HEVA (Hierarchical Evidence Organization for Valence-Arousal in Dynamic Music
+Emotion Recognition, DMER) predicts continuous valence and arousal with
+dimension-specific readouts over frozen Music Flamingo features. This
+repository contains the preparation, training, evaluation, export, and
+inference code used in the paper. Datasets, model weights, feature caches, and
+run outputs are not included.
 
 ## Model Architecture
 
@@ -22,6 +22,7 @@ HEVA-main/
 |-- prepare.py                # Build manifests and feature caches
 |-- run.py                    # Training and evaluation entry point
 |-- infer.py                  # Inference entry point for one audio file
+|-- select_heads.py           # Training-only arousal head selection
 |-- splits/                   # Song-level splits used in the paper
 |   |-- deam/
 |   |   |-- train.txt
@@ -163,6 +164,29 @@ CUDA_VISIBLE_DEVICES=0 python run.py \
   --branch both \
   --backend cuda
 ```
+
+## Reproduce the Arousal Head Selection
+
+The frozen arousal attention heads can be re-selected from training data only.
+By default the script is self-contained: it ranks a shortlist on the fly, uses
+the released frozen heads as the baseline, and never loads the test split.
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python select_heads.py \
+  --dataset deam \
+  --seeds 1 2 3 4 42 \
+  --top-k 8 \
+  --backend cuda \
+  --cache-device cuda
+```
+
+The selected heads and cross-validation metrics are written as JSON under
+`outputs/head_selection/`, and `configs/frozen.yaml` is not modified. Use
+`--dataset pmemo` for PMEmo and `--backend cpu --cache-device cpu` on a
+CPU-only machine. An exact per-seed reproduction can instead take training-only
+ranking and protocol files through `--ranking-template` and
+`--selection-protocol`; `--refit-alpha` is an optional diagnostic that does not
+change the selected heads.
 
 ## Export and Run Inference
 

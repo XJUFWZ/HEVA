@@ -1,37 +1,25 @@
-"""Select the arousal attention heads from training data, and optionally the
-head Ridge alpha.
-
-This is the training-only head-selection routine behind the arousal entries of
-configs/frozen.yaml. Test features and test labels are never loaded.
-
-Two input modes are supported:
-
-* Exact reproduction. For every seed, a training-only per-head ranking JSON
-  supplies the macro-CCC shortlist and a selection-protocol JSON supplies the
-  starting baseline heads together with the fixed head/acoustic Ridge alphas.
-  The candidate pool is the per-seed shortlist union the per-seed baseline.
-  Provide these with --ranking-template and --selection-protocol.
-
-* Self-contained probe. When no ranking or protocol is given, the shortlist is
-  estimated on the fly from the head shards and the frozen configuration is
-  used as the baseline. This needs no extra files but only approximates the
-  original run because the on-the-fly probe uses a pooled ranking.
-
-For every seed, the complete arousal branch is evaluated inside grouped
-cross-validation: the head and handcrafted-acoustic streams each get a
-first-stage Ridge, their out-of-fold predictions are fused with a fixed convex
-weight, and a temporal Ridge produces the validation prediction. Heads are
-grown greedily from an empty set on the mean fold CCC minus a stability
-penalty on its sample standard deviation, using a fixed head Ridge alpha. The
-greedy trajectories of all seeds are combined into one consensus set.
-
-With --refit-alpha, the selected set is additionally scored on a fixed alpha
-grid and an alpha is reported only when its mean RMSE does not exceed the
-baseline mean RMSE; this is a diagnostic and never changes the selected heads.
-
-The result is written to JSON. configs/frozen.yaml is not modified; the
-reported heads are meant to be compared against it manually.
-"""
+# Training-only selection of the arousal attention heads, with an optional
+# diagnostic refit of the head Ridge alpha. Reproduces the arousal entries of
+# configs/frozen.yaml and never loads test features or test labels.
+#
+# Input modes:
+# - Default (no ranking or protocol): rank a shortlist on the fly from the
+#   head shards and use the released frozen heads as the baseline. This needs
+#   no extra files but is approximate, since one pooled ranking is shared.
+# - --ranking-template with --selection-protocol: each seed uses its own
+#   training-only ranking shortlist and starting baseline with fixed
+#   head/acoustic alphas, for an exact per-seed reproduction.
+#
+# Per seed, the full arousal branch is scored in grouped cross-validation: the
+# head and acoustic streams each get a first-stage Ridge, their out-of-fold
+# predictions are fused with a fixed convex weight, and a temporal Ridge gives
+# the validation prediction. Heads grow greedily from an empty set, maximizing
+# mean fold CCC minus a stability penalty on its sample standard deviation, at
+# a fixed head Ridge alpha. The seed trajectories form one consensus set.
+#
+# --refit-alpha re-scores the selected set on an alpha grid under the baseline
+# RMSE guard; it is diagnostic and never changes the selected heads. The result
+# is written to JSON, and configs/frozen.yaml is never modified.
 
 from __future__ import annotations
 
@@ -1033,8 +1021,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--ranking-template",
         default="",
-        help="per-seed ranking path containing '{seed}', e.g. "
-        "selection_inputs/deam_seed{seed}_arousal.json",
+        help="per-seed ranking path containing a '{seed}' placeholder",
     )
     parser.add_argument(
         "--selection-protocol",
