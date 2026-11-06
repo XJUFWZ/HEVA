@@ -103,101 +103,101 @@ arousal:
   pmemo:
     '1':
       heads:
-      - layer: 19
-        head: 26
-      - layer: 17
-        head: 23
-      - layer: 19
-        head: 22
-      - layer: 19
-        head: 25
-      - layer: 16
-        head: 5
-      - layer: 17
+      - layer: 9
+        head: 4
+      - layer: 9
+        head: 21
+      - layer: 0
+        head: 0
+      - layer: 0
+        head: 2
+      - layer: 0
+        head: 13
+      - layer: 0
+        head: 12
+      - layer: 0
+        head: 9
+      - layer: 1
         head: 1
-      - layer: 17
-        head: 18
-      - layer: 18
-        head: 15
       head_alpha: 10000.0
       acoustic_alpha: 10.0
     '2':
       heads:
-      - layer: 19
-        head: 26
-      - layer: 19
-        head: 25
-      - layer: 17
+      - layer: 9
+        head: 4
+      - layer: 9
+        head: 21
+      - layer: 0
+        head: 0
+      - layer: 0
+        head: 2
+      - layer: 0
+        head: 13
+      - layer: 0
+        head: 12
+      - layer: 0
+        head: 9
+      - layer: 1
         head: 1
-      - layer: 18
-        head: 15
-      - layer: 18
-        head: 19
-      - layer: 16
-        head: 5
-      - layer: 19
-        head: 22
-      - layer: 19
-        head: 24
       head_alpha: 10000.0
       acoustic_alpha: 100.0
     '3':
       heads:
-      - layer: 19
-        head: 26
-      - layer: 19
-        head: 25
-      - layer: 18
-        head: 15
-      - layer: 19
-        head: 22
-      - layer: 19
-        head: 24
-      - layer: 17
+      - layer: 9
+        head: 4
+      - layer: 9
+        head: 21
+      - layer: 0
+        head: 0
+      - layer: 0
+        head: 2
+      - layer: 0
+        head: 13
+      - layer: 0
+        head: 12
+      - layer: 0
+        head: 9
+      - layer: 1
         head: 1
-      - layer: 17
-        head: 23
-      - layer: 14
-        head: 22
       head_alpha: 3000.0
       acoustic_alpha: 10.0
     '4':
       heads:
-      - layer: 19
-        head: 26
-      - layer: 19
-        head: 25
-      - layer: 19
-        head: 22
-      - layer: 16
-        head: 5
-      - layer: 16
-        head: 3
-      - layer: 17
-        head: 23
-      - layer: 19
+      - layer: 9
+        head: 4
+      - layer: 9
         head: 21
-      - layer: 15
-        head: 6
+      - layer: 0
+        head: 0
+      - layer: 0
+        head: 2
+      - layer: 0
+        head: 13
+      - layer: 0
+        head: 12
+      - layer: 0
+        head: 9
+      - layer: 1
+        head: 1
       head_alpha: 10000.0
       acoustic_alpha: 100.0
     '42':
       heads:
-      - layer: 19
-        head: 26
-      - layer: 19
-        head: 25
-      - layer: 19
-        head: 22
-      - layer: 17
-        head: 23
-      - layer: 17
+      - layer: 9
+        head: 4
+      - layer: 9
+        head: 21
+      - layer: 0
+        head: 0
+      - layer: 0
+        head: 2
+      - layer: 0
+        head: 13
+      - layer: 0
+        head: 12
+      - layer: 0
+        head: 9
+      - layer: 1
         head: 1
-      - layer: 18
-        head: 15
-      - layer: 19
-        head: 24
-      - layer: 19
-        head: 23
       head_alpha: 3000.0
       acoustic_alpha: 100.0
