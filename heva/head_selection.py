@@ -786,7 +786,7 @@ def run_head_selection(
     oof_seed_base = OOF_SEED_BASE[dataset]
 
     # The released frozen configuration is the final cross-seed consensus; it
-    # is the comparison target, not the starting baseline of the selection run.
+    # is the comparison target and, without a selection protocol, the baseline.
     final_heads_by_seed = {
         seed: [
             (int(row["layer"]), int(row["head"]))
